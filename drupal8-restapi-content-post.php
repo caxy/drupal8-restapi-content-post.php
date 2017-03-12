@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 
 // Update to a user on your Drupal site that has permissions to create content
 $user = 'admin';
-$pass = 'CaXy1313';
+$pass = 'password1234';
 $url = 'http://127.0.0.1:9200';
 
 // A great curl wrapper
