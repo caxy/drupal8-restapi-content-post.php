@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 
 // Update to a user on your Drupal site that has permissions to create content
 $user = 'admin';
-$pass = 'password1234';
+$pass = 'CaXy1313';
 $url = 'http://127.0.0.1:9200';
 
 // A great curl wrapper
@@ -28,6 +28,14 @@ $client = new GuzzleHttp\Client([
 // Gotcha: do not send auth when getting the token
 $res = $client->request('GET', '/rest/session/token');
 $csrf_token = $res->getBody();
+
+// Check to see if it worked
+if ($res->getStatusCode() == 200) {
+    echo "CSRF Success: " . $csrf_token ."\n";
+} else {
+    echo "Trouble getting the token.\n";
+}
+
 
 // Set up a serialized JSON package to send
 $serialized_entity = json_encode([
@@ -53,3 +61,10 @@ $res = $content_client->request('POST', '/entity/node?_format=hal_json', [
         'X-CSRF-Token' => $csrf_token
     ]
 ]);
+
+// Check to see if it worked
+if ($res->getStatusCode() == 201) {
+    echo "POST Success: " . $res->getBody(). "\n";
+} else {
+    echo "HTTP Error with POST: " . $res->getStatusCode() .  "\n";
+}
